@@ -1,0 +1,1 @@
+<?php include PATH_VIEW_CLIENT. '/default/header.php'; ?>

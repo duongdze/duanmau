@@ -26,7 +26,7 @@ define('DB_HOST',           'localhost');
 define('DB_PORT',           '3307');
 define('DB_USERNAME',       'root');
 define('DB_PASSWORD',       '');
-define('DB_NAME',           'testdb');
+define('DB_NAME',           'sneaker_shop');
 define('DB_OPTIONS', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

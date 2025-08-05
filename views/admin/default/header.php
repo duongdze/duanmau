@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div class="header__container xs">
+        <div class="header__container">
             <div class="header__container--logo">
                 LOGO
             </div>

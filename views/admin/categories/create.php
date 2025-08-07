@@ -1,0 +1,1 @@
+<?php require_once PATH_VIEW_ADMIN . 'default/header.php'; ?>

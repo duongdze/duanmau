@@ -1,41 +1,44 @@
-<?php include PATH_VIEW_ADMIN. '/default/header.php'; ?><table class="table">
-    <tr>
-        <th>ID</th>
-        <th>AVATAR</th>
-        <th>NAME</th>
-        <th>PASSWORD</th>
-        <th>EMAIL</th>
-        <th>FULL NAME</th>
-        <th>PHONE NUMBER</th>
-        <th>USER TYPE</th>
-        <th>ACTION</th>
-    </tr>
+<?php include PATH_VIEW_ADMIN . '/default/header.php'; ?>
 
-    <?php foreach ($data as $user){ ?>
+<a href="<?= BASE_URL_ADMIN ?>&action=users-create" class="btn btn-primary mb-3">Thêm mới người dùng</a>
+
+<table class="table table-striped table-hover border">
+    <thead>
         <tr>
-            <td><?= $user['user_id'] ?></td>
-            <td>
-                <?php if (!empty($user['avatar'])): ?>
-                    <img src="<?= BASE_ASSETS_UPLOADS . $user['avatar'] ?>" width="100px">
-                <?php endif; ?>
-            </td>
-            <td><?= $user['username'] ?></td>
-            <td><?= $user['password_hash'] ?></td>
-            <td><?= $user['email'] ?></td>
-            <td><?= $user['full_name'] ?></td>
-            <td><?= $user['phone_number'] ?></td>
-            <td><?= $user['user_type'] ?></td>
-            <td>
-                <a href="<?= BASE_URL_ADMIN . '&action=users-show&id=' . $user['user_id'] ?>"
-                    class="btn btn-info">Xem</a>
-
-                <a href="<?= BASE_URL_ADMIN . '&action=users-edit&id=' . $user['user_id'] ?>"
-                    class="btn btn-warning ms-3 me-3">Sửa</a>
-
-                <a href="<?= BASE_URL_ADMIN . '&action=users-delete&id=' . $user['user_id'] ?>"
-                    onclick="return confirm('Có chắc xóa không?')"
-                    class="btn btn-danger">Xóa</a>
-            </td>
+            <th>ID</th>
+            <th>Ảnh đại diện</th>
+            <th>Tên đăng nhập</th>
+            <th>Email</th>
+            <th>Họ và tên</th>
+            <th>Số điện thoại</th>
+            <th>Loại tài khoản</th>
+            <th>Hành động</th>
         </tr>
-    <?php } ?>
+    </thead>
+
+    <tbody>
+        <?php foreach ($data as $user) : ?>
+            <tr>
+                <td><?= $user['user_id'] ?></td>
+                <td>
+                    <?php if (!empty($user['avatar'])) : ?>
+                        <img src="<?= BASE_ASSETS_UPLOADS . $user['avatar'] ?>" alt="Avatar của <?= htmlspecialchars($user['username']) ?>" width="100px">
+                    <?php else : ?>
+                        N/A
+                    <?php endif; ?>
+                </td>
+                <td><?= htmlspecialchars($user['username']) ?></td>
+                <td><?= htmlspecialchars($user['email']) ?></td>
+                <td><?= htmlspecialchars($user['full_name']) ?></td>
+                <td><?= htmlspecialchars($user['phone_number']) ?></td>
+                <td><?= htmlspecialchars($user['user_type']) ?></td>
+                <td>
+                    <a href="<?= BASE_URL_ADMIN . '&action=users-show&id=' . $user['user_id'] ?>" class="btn btn-info btn-sm">Xem</a>
+                    <a href="<?= BASE_URL_ADMIN . '&action=users-edit&id=' . $user['user_id'] ?>" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="<?= BASE_URL_ADMIN . '&action=users-delete&id=' . $user['user_id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>
+

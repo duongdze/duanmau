@@ -6,6 +6,6 @@ class DashboardController
     {
         $view = 'dashboard';
         
-        require_once PATH_VIEW_ADMIN_MAIN;
+        require_once PATH_VIEW_ADMIN . 'users/dashboard.php';
     }
 }

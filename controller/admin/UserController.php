@@ -103,11 +103,12 @@ class UserController
     public function loginProcess()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = $_POST["username"] ?? "";
+            $email = $_POST["email"] ?? "";
+            // $username = $_POST["username"] ?? "";
             $password = $_POST["password"] ?? "";
 
-            if ($username === "edu" && $password === "learn2023") {
-                $_SESSION["username"] = $username;
+            if ($this->user->checkLogin($email, $password)) {
+                $_SESSION["username"] = $email;
                 header("Location: " . BASE_URL_ADMIN); // Chuyển hướng về dashboard
                 exit;
             } else {

@@ -2,7 +2,7 @@
 $action = $_GET['action'] ?? '/';
 
 match ($action){
-    '/' => (new DashboardController)->index(),
+    '/'                     => (new DashboardController)->index(),
     
     //login logout in user
     'login'                 => (new UserController)->login(),

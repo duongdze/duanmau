@@ -3,28 +3,43 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 /* 
 =====================
  1.Start Header css
 ===================== 
 */
-header{
-    background-color: #ebebeb;
+.header {
+    background-color: #3a3f5c;
+    color: white;
+    padding: 0 auto;
+    font-family: Arial, sans-serif;
 }
+
 .header__container {
     display: flex;
     align-items: center;
-    justify-items: center;
-    max-width: 1800px;
-    margin: auto;
-
+    max-width: 1440px;
+    margin: 0 auto;
+    /* Tự động căn giữa theo chiều ngang */
+    background-color: #3a3f5c;
+    /* Màu nền cho vùng nội dung */
+    padding: 15px 0px;
+    /* Khoảng đệm bên trong vùng nội dung */
+    border-radius: 8px;
+    /* Bo góc cho mềm mại (tùy chọn) */
 }
 
 .header__container--logo {
     font: script bold italic;
     font-size: 40px;
-    color: black;
+    color: #FFFFFE;
     margin-right: 30px;
+}
+
+.header__container--menu {
+    color: #000000;
+    margin: 0 10px;
 }
 
 .menu__list--item {
@@ -33,12 +48,30 @@ header{
     padding: 0;
     margin: 0;
     align-items: center;
-
+    color: #000000;
 }
 
 .menu__list--item .list__item {
     margin: 0 20px;
     font-size: 20px;
+}
+
+.btn-category,
+.dropdown-menu {
+    background-color: #EEBBC3 !important;
+    color: #232946 !important;
+    border-color: #EEBBC3 !important;
+}
+
+/* Thêm style cho trạng thái hover, focus và khi dropdown đang mở */
+.btn-category:hover,
+.btn-category:focus,
+.btn-category.show {
+    background-color: #e8a9b4 !important;
+    /* Một màu tối hơn một chút */
+    color: #232946 !important;
+    border-color: #e8a9b4 !important;
+    box-shadow: none !important;
 }
 
 .header__container--search {
@@ -70,25 +103,47 @@ header{
     color: aqua;
 }
 
-.search__input:focus + svg {
+.search__input:focus+svg {
     right: -8px;
     width: 20px;
 }
 
-.header__container--search svg:hover{
+.header__container--search svg:hover {
     opacity: 0.5;
 }
+
 .header__container--user {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: auto;
     /* margin-right: 20px; */
+    color: #FFFFFE;
 }
 
 .container__user--login,
 .container__user--register {
     margin: 0 10px;
+}
+
+.container__user--login a {
+    color: inherit;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.container__user--login a:hover {
+    opacity: 0.7;
+}
+
+.container__user--login a {
+    color: inherit;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.container__user--login a:hover {
+    opacity: 0.7;
 }
 
 .container__user--login button {
@@ -107,11 +162,13 @@ header{
     color: black;
     cursor: pointer;
 }
+
 @media (max-width: 768px) {
-    header{
+    header {
         width: 100%;
     }
 }
+
 /* 
 =====================
  End Header css
@@ -119,4 +176,599 @@ header{
 */
 
 
+/* 
+=====================
+ Start home css
+===================== 
+*/
+.home {
+    background-color: #232946;
+    font-family: Arial, sans-serif;
+    padding-bottom: 40px;
+    /* Tạo khoảng cách với footer */
+}
 
+.home__main--container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.main__container--bannner img {
+    width: 1440px;
+}
+
+.main__container--content {
+    margin-top: 20px;
+}
+
+.content__bestsell--title,
+.content__news--title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.content__title {
+    color: #B8C1EC;
+    font-size: 48px;
+}
+
+.content__button button {
+    background-color: unset;
+    color: #EEBBC3;
+    border: 1px solid #EEBBC3;
+    font-size: 16px;
+    padding: 16px;
+    margin-top: 4px;
+}
+
+.content__button button:hover {
+    background-color: #EEBBC3;
+    color: #232946;
+    transition: all 0.3s ease;
+}
+
+.content__bestsell--products,
+.content__news--products {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.bestsell__product,
+.news__product {
+    position: relative;
+    /* Đặt làm gốc cho việc định vị thẻ tag */
+    background-color: #3a3f5c;
+    border-radius: 8px;
+    overflow: hidden;
+    width: calc((100% - 80px) / 3);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out;
+}
+
+.bestsell__product:hover,
+.news__product:hover {
+    transform: translateY(-10px);
+}
+
+.product__image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.product__bestsell,
+.product__news {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #EEBBC3;
+    color: #232946;
+    padding: 5px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.product__bestsell p,
+.product__news p {
+    margin: 0;
+}
+
+.product__title {
+    color: #FFFFFE;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 20px 20px 10px 20px;
+    flex-grow: 1;
+}
+
+.prodcut__detail {
+    padding: 0 20px 20px 20px;
+}
+
+.prodcut__detail a {
+    color: #EEBBC3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.prodcut__detail a:hover {
+    text-decoration: underline;
+}
+
+/* 
+=====================
+ End home css
+===================== 
+*/
+
+
+/* 
+=====================
+ Start login css
+===================== 
+*/
+.main__login {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #232946;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* BLOCK: login-form */
+.login-form {
+    background: transparent;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* ELEMENT: login-form__title */
+.login-form__title {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* ELEMENT: login-form__group */
+.login-form__group {
+    margin-bottom: 1rem;
+}
+
+/* ELEMENT: login-form__input */
+.login-form__input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+    color: #666666;
+    outline: none;
+    box-shadow: none;
+}
+
+.login-form__input::placeholder {
+    color: #999999;
+    font-weight: 400;
+}
+
+.login-form__input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* ELEMENT: login-form__button */
+.login-form__button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #e8a5a5;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #3a3f5c;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.login-form__button:hover {
+    background-color: #e49999;
+}
+
+/* ELEMENT: login-form__links */
+.login-form__links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+/* ELEMENT: login-form__link */
+.login-form__link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.login-form__link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ELEMENT: login-form__divider */
+.login-form__divider {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+/* ELEMENT: login-form__register-link */
+.login-form__register-link {
+    color: #ffffff;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: opacity 0.2s ease;
+    opacity: 0.8;
+}
+
+.login-form__register-link:hover {
+    opacity: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .login-form {
+        padding: 0 1rem;
+    }
+
+    .login-form__title {
+        font-size: 1.75rem;
+    }
+
+    .login-form__links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+/* 
+=====================
+ End login css
+===================== 
+*/
+
+
+/* 
+=====================
+ Start register css
+===================== 
+*/
+.main__register {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #232946;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* BLOCK: register-form */
+.register-form {
+    background: transparent;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* ELEMENT: register-form__title */
+.register-form__title {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* ELEMENT: register-form__group */
+.register-form__group {
+    margin-bottom: 1rem;
+}
+
+/* ELEMENT: register-form__input */
+.register-form__input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+    color: #666666;
+    outline: none;
+    box-shadow: none;
+}
+
+.register-form__input::placeholder {
+    color: #999999;
+    font-weight: 400;
+}
+
+.register-form__input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* ELEMENT: register-form__button */
+.register-form__button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #e8a5a5;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #3a3f5c;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.register-form__button:hover {
+    background-color: #e49999;
+}
+
+/* ELEMENT: register-form__links */
+.register-form__links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+/* ELEMENT: register-form__link */
+.register-form__link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.register-form__link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ELEMENT: register-form__divider */
+.register-form__divider {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+/* ELEMENT: register-form__register-link */
+.register-form__register-link {
+    color: #ffffff;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: opacity 0.2s ease;
+    opacity: 0.8;
+}
+
+.register-form__register-link:hover {
+    opacity: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .register-form {
+        padding: 0 1rem;
+    }
+
+    .register-form__title {
+        font-size: 1.75rem;
+    }
+
+    .register-form__links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+/* 
+=====================
+ End register css
+===================== 
+*/
+
+
+/* 
+=====================
+ Start footer css
+===================== 
+*/
+.footer {
+    background-color: #3a3f5c;
+    color: white;
+    padding: 40px 20px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.footer__container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.footer__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer__company {
+    /* Thông tin công ty */
+}
+
+.footer__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.footer__address {
+    margin-bottom: 15px;
+    color: #B8C1EC;
+}
+
+.footer__contact {
+    margin-bottom: 15px;
+    color: #B8C1EC;
+}
+
+.footer__label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.footer__text {
+    font-size: 14px;
+    /* color: white; */
+    line-height: 1.4;
+}
+
+.footer__link {
+    font-size: 14px;
+    color: #B8C1EC;
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.footer__social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.footer__social-icon {
+    width: 35px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.footer__social-icon i {
+    color: #B8C1EC;
+}
+
+.footer__social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.footer__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-left: auto;
+}
+
+.footer__links-column {}
+
+.footer__links-list {
+    list-style: none;
+}
+
+.footer__links-item {
+    margin-bottom: 10px;
+
+}
+
+.footer__nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer__nav-link:hover {
+    color: white;
+}
+
+.footer__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer__copyright {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.footer__legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer__legal-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer__legal-link:hover {
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer__content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer__links {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}

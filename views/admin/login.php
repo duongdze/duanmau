@@ -12,7 +12,7 @@
         <table>
             <tr>
                 <td>Tên đăng nhập</td>
-                <td><input type="text" name="username" required></td>
+                <td><input type="text" name="email" required></td>
             </tr>
             <tr>
                 <td>Mật khẩu</td>

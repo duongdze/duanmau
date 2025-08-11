@@ -9,4 +9,5 @@ class AuthController{
     public function register(){
         require_once PATH_VIEW_CLIENT . 'auth/register.php';
     }
+    
 }

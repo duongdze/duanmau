@@ -14,8 +14,8 @@
 <body>
     <div class="header">
         <div class="header__container xs">
-            <div class="header__container--logo col-4">
-                LOGO
+            <div class="header__container--logo col-2">
+                <a href="<?= BASE_URL ?>">LOGO</a>
             </div>
             <div class="header__container--menu ">
                 <div class="container__menu--list">
@@ -24,9 +24,9 @@
                             <i class="fa-solid fa-bars me-2"></i> Danh mục
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Liên hệ</a></li>
-                            <li><a class="dropdown-item" href="#">Sản phẩm bán chạy</a></li>
-                            <li><a class="dropdown-item" href="#">Tin tức</a></li>
+                            <li><a class="dropdown-item" href="?action=bestsell">Sản phẩm bán chạy</a></li>
+                            <li><a class="dropdown-item" href="?action=news">Tin tức</a></li>
+                            <li><a class="dropdown-item" href="?action=contact">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,15 +41,17 @@
                 <div class="container__user--login">
                     <a href="?action=login" title="Đăng nhập">
                         <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 16 16">
-                            <path fill="currentColor" d="M11 7c0 1.66-1.34 3-3 3S5 8.66 5 7s1.34-3 3-3s3 1.34 3 3" />
-                            <path fill="currentColor" fill-rule="evenodd" d="M16 8c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8M4 13.75C4.16 13.484 5.71 11 7.99 11c2.27 0 3.83 2.49 3.99 2.75A6.98 6.98 0 0 0 14.99 8c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 2.38 1.19 4.49 3.01 5.75" clip-rule="evenodd" />
+                            <path fill="#FFFFFE" d="M11 7c0 1.66-1.34 3-3 3S5 8.66 5 7s1.34-3 3-3s3 1.34 3 3" />
+                            <path fill="#FFFFFE" fill-rule="evenodd" d="M16 8c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8M4 13.75C4.16 13.484 5.71 11 7.99 11c2.27 0 3.83 2.49 3.99 2.75A6.98 6.98 0 0 0 14.99 8c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 2.38 1.19 4.49 3.01 5.75" clip-rule="evenodd" />
                         </svg>
                     </a>
                 </div>
                 <div class="container__user--cart">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z" />
-                    </svg>
+                    <a href="?action=cart" title="Giỏ hàng">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24">
+                            <path fill="#FFFFFE" d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>

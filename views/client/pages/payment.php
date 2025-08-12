@@ -50,7 +50,7 @@
     <div class="payment__right">
         <div class="right__product">
             <div class="product__info">
-                <div class="product__image">👟</div>
+                <div class="product__info--image">👟</div>
                 <div class="product__details">
                     <div class="product__name">Sản phẩm</div>
                     <div class="product__price">1.279.000₫</div>

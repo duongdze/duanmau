@@ -16,5 +16,6 @@ match ($action){
     'payment' => (new PagesController)->payment(),
     'news' => (new PagesController)->news(),
     'newsdetail' => (new PagesController)->newsdetail(),
+    'productdetail' => (new PagesController)->productdetail(),
     
 };

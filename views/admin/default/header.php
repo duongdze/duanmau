@@ -9,7 +9,7 @@
 <body>
 <?php
     // Bảo vệ trang admin, yêu cầu đăng nhập
-    if (empty($_SESSION['username'])) {
+    if (empty($_SESSION['user'])) {
         header('Location: ' . BASE_URL_ADMIN . '&action=login');
         exit;
     }
@@ -21,3 +21,4 @@
     <div class="flex-grow-1 p-4">
         <div class="container-fluid">
             <h1><?= $title ?? 'Dashboard' ?></h1>
+

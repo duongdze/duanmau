@@ -976,7 +976,7 @@ Start contact css
     margin-bottom: 20px;
 }
 
-.product__image {
+.product__info--image {
     width: 80px;
     height: 80px;
     background: #f8f9fa;
@@ -1465,13 +1465,6 @@ Start contact css
 ===================== 
 */
 
-
-
-/* 
-=====================
- End newsdetail css
-===================== 
-*/
 .newsdetail{
     background-color: #232946;
     color: #B8C1EC;
@@ -1488,6 +1481,191 @@ Start contact css
 .news__container--img img{
     width: 100%;
 }
+
+/* 
+=====================
+ End newsdetail css
+===================== 
+*/
+
+/* 
+=====================
+ Start productDetail css
+===================== 
+*/
+.productDetail {
+    background-color: #232946;
+    padding: 60px 20px;
+    color: #FFFFFE;
+    font-family: Arial, sans-serif;
+}
+
+.productDetail__main--container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.container__left--img img {
+    width: 100%;
+    border-radius: 12px;
+    background-color: #3a3f5c;
+}
+
+.productDetail__container--right {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-info__name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FFFFFE;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.product-info__rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #ffc107;
+}
+
+.product-info__rating a {
+    color: #B8C1EC;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.product-info__rating a:hover {
+    text-decoration: underline;
+}
+
+.product-info__price {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.product-info__price .price--old {
+    font-size: 1.2rem;
+    color: #868e96;
+    text-decoration: line-through;
+}
+
+.product-info__price .price--new {
+    font-size: 2rem;
+    color: #EEBBC3;
+}
+
+.product-info__options {
+    border-top: 1px solid #4a5073;
+    border-bottom: 1px solid #4a5073;
+    padding: 25px 0;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.options__group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.options__label {
+    font-size: 1rem;
+    color: #B8C1EC;
+    width: 80px;
+}
+
+.options__colors {
+    display: flex;
+    gap: 10px;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+}
+
+.color-option.selected {
+    border-color: #EEBBC3;
+}
+
+.options__sizes {
+    display: flex;
+    gap: 10px;
+}
+
+.size-option {
+    padding: 8px 15px;
+    border: 1px solid #B8C1EC;
+    background-color: transparent;
+    color: #B8C1EC;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.size-option:hover {
+    background-color: #B8C1EC;
+    color: #232946;
+}
+
+.size-option.selected {
+    background-color: #EEBBC3;
+    color: #232946;
+    border-color: #EEBBC3;
+}
+
+.size-option.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #4a5073;
+    border-color: #4a5073;
+    color: #868e96;
+}
+
+.product-info__actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+
+.quantity-btn {
+    background: none;
+    border: none;
+    color: #B8C1EC;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px 15px;
+    line-height: 1;
+}
+
+
+/* 
+=====================
+ End productDetail css
+===================== 
+*/
 
 
 /* 
@@ -1878,3 +2056,8 @@ Start contact css
         grid-template-columns: 1fr;
     }
 }
+/* 
+=====================
+ End footer css
+===================== 
+*/

@@ -30,7 +30,7 @@
                 <td><?= htmlspecialchars($user['username']) ?></td>
                 <td><?= htmlspecialchars($user['email']) ?></td>
                 <td><?= htmlspecialchars($user['full_name']) ?></td>
-                <td><?= htmlspecialchars($user['phone_number']) ?></td>
+                <td><?= htmlspecialchars($user['phone_number'] ?? 'Chưa cập nhật') ?></td>
                 <td><?= htmlspecialchars($user['user_type']) ?></td>
                 <td>
                     <a href="<?= BASE_URL_ADMIN . '&action=users-show&id=' . $user['user_id'] ?>" class="btn btn-info btn-sm">Xem</a>

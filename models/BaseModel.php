@@ -29,17 +29,27 @@ class BaseModel
      * 
      * @param string $columns Mặc định lấy tất cả các cột, truyền cột phân cách nhau bằng dấu phẩy
      * @param string $conditions Mệnh đề điều kiện đặt ở đây
-     * @param array $params giá trị của các tham số ảo trong $conditions
+     * @param array  $params giá trị của các tham số ảo trong $conditions
+     * @param string $orderBy Mệnh đề sắp xếp
+     * @param int    $limit Giới hạn số bản ghi
      * @return array
      * 
-     * Khi dùng: $obj->select('id, name', 'id > :id AND price > :price', ['id' => 3, 'price' => 36000])
+     * Khi dùng: $obj->select('id, name', 'id > :id', ['id' => 3], 'id DESC', 5)
      */
-    public function select($columns = '*', $conditions = null, $params = [])
+    public function select($columns = '*', $conditions = null, $params = [], $orderBy = null, $limit = null)
     {
         $sql = "SELECT $columns FROM {$this->table}";
 
         if ($conditions) {
             $sql .= " WHERE $conditions";
+        }
+
+        if ($orderBy) {
+            $sql .= " ORDER BY $orderBy";
+        }
+
+        if ($limit) {
+            $sql .= " LIMIT " . (int)$limit;
         }
 
         $stmt = $this->pdo->prepare($sql);

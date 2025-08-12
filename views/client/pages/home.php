@@ -15,48 +15,28 @@
                     </div>
                 </div>
                 <div class="content__bestsell--products">
-                    <div class="bestsell__product">
-                        <div class="product__image">
-                            <img src="<?= BASE_ASSETS_CLIENT ?>image/IMG_1015-430x430.jpg.avif" alt="">
-                        </div>
-                        <div class="product__bestsell">
-                            <p>Bán chạy</p>
-                        </div>
-                        <div class="product__title">
-                            VANS VAULT OG OLD SKOOL
-                        </div>
-                        <div class="prodcut__detail">
-                            <a href="#">Xem chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="bestsell__product">
-                        <div class="product__image">
-                            <img src="<?= BASE_ASSETS_CLIENT ?>image/IMG_1015-430x430.jpg.avif" alt="">
-                        </div>
-                        <div class="product__bestsell">
-                            <p>Bán chạy</p>
-                        </div>
-                        <div class="product__title">
-                            VANS VAULT OG OLD SKOOL
-                        </div>
-                        <div class="prodcut__detail">
-                            <a href="#">Xem chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="bestsell__product">
-                        <div class="product__image">
-                            <img src="<?= BASE_ASSETS_CLIENT ?>image/IMG_1015-430x430.jpg.avif" alt="">
-                        </div>
-                        <div class="product__bestsell">
-                            <p>Bán chạy</p>
-                        </div>
-                        <div class="product__title">
-                            VANS VAULT OG OLD SKOOL
-                        </div>
-                        <div class="prodcut__detail">
-                            <a href="#">Xem chi tiết</a>
-                        </div>
-                    </div>
+                    <?php if (!empty($topSellingProducts)) : ?>
+                        <?php foreach ($topSellingProducts as $product) : ?>
+                            <div class="bestsell__product">
+                                <div class="product__image">
+                                    <a href="?action=productdetail&id=<?= $product['product_id'] ?>">
+                                        <img src="<?= BASE_ASSETS_UPLOADS ?><?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['product_name']) ?>">
+                                    </a>
+                                </div>
+                                <div class="product__bestsell">
+                                    <p>Bán chạy</p>
+                                </div>
+                                <div class="product__title">
+                                    <?= htmlspecialchars($product['product_name']) ?>
+                                </div>
+                                <div class="prodcut__detail">
+                                    <a href="?action=productdetail&id=<?= $product['product_id'] ?>">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <p>Chưa có sản phẩm bán chạy nào để hiển thị.</p>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="container__content--news">
@@ -80,7 +60,7 @@
                             DI sản của Tinker
                         </div>
                         <div class="prodcut__detail">
-                            <a href="#">Xem chi tiết</a>
+                            <a href="?action=newsdetail">Xem chi tiết</a>
                         </div>
                     </div>
                     <div class="news__product">

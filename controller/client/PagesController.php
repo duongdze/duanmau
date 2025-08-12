@@ -7,6 +7,7 @@ class PagesController{
         require_once PATH_VIEW_CLIENT . 'pages/bestsell.php';
     }
     public function cart(){
+        
         require_once PATH_VIEW_CLIENT . 'pages/cart.php';
     }
     public function payment(){
@@ -17,5 +18,25 @@ class PagesController{
     }
     public function newsdetail(){
         require_once PATH_VIEW_CLIENT . 'pages/newsdetail.php';
+    }
+    public function productdetail(){
+        // Lấy ID sản phẩm từ URL
+        $productID = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+        // Kiểm tra nếu ID không hợp lệ thì có thể chuyển hướng hoặc báo lỗi
+        if ($productID <= 0) {
+            // Tạm thời báo lỗi, trong thực tế nên có trang 404
+            die('Sản phẩm không hợp lệ!');
+        }
+
+        // Gọi model để lấy thông tin sản phẩm
+        $productModel = new Product();
+        $product = $productModel->findWithCategoryName($productID);
+
+        if (!$product) {
+            die('Không tìm thấy sản phẩm!');
+        }
+
+        require_once PATH_VIEW_CLIENT . 'pages/productDetail.php';
     }
 }

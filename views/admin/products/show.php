@@ -16,7 +16,7 @@
             <div class="col-md-8">
                 <h5 class="card-title">ID: <?= $data['product_id'] ?></h5>
                 <p class="card-text"><strong>Tên sản phẩm:</strong> <?= htmlspecialchars($data['product_name']) ?></p>
-                <p class="card-text"><strong>Danh mục:</strong> <?= htmlspecialchars($data['category_id']) ?></p>
+                <p class="card-text"><strong>Danh mục:</strong> <?= htmlspecialchars($data['category_name']) ?></p>
                 <p class="card-text"><strong>Giá:</strong> <?= number_format($data['price'], 0, ',', '.') ?> đ</p>
                 <p class="card-text"><strong>Số lượng trong kho:</strong> <?= $data['stock_quantity'] ?></p>
                 <p class="card-text"><strong>Trạng thái:</strong> <span class="badge bg-success"><?= htmlspecialchars($data['status']) ?></span></p>

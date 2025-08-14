@@ -38,13 +38,23 @@
                 </svg>
             </div>
             <div class="header__container--user">
-                <div class="container__user--login">
-                    <a href="?action=login" title="Đăng nhập">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Tài khoản">
                         <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 16 16">
                             <path fill="#FFFFFE" d="M11 7c0 1.66-1.34 3-3 3S5 8.66 5 7s1.34-3 3-3s3 1.34 3 3" />
                             <path fill="#FFFFFE" fill-rule="evenodd" d="M16 8c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8M4 13.75C4.16 13.484 5.71 11 7.99 11c2.27 0 3.83 2.49 3.99 2.75A6.98 6.98 0 0 0 14.99 8c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 2.38 1.19 4.49 3.01 5.75" clip-rule="evenodd" />
                         </svg>
                     </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <?php if (isset($_SESSION['user'])) : ?>
+                            <li><span class="dropdown-item-text">Chào, <strong><?= htmlspecialchars($_SESSION['user']['full_name']) ?></strong></span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="?action=logout">Đăng xuất</a></li>
+                        <?php else : ?>
+                            <li><a class="dropdown-item" href="?action=login">Đăng nhập</a></li>
+                            <li><a class="dropdown-item" href="?action=register">Đăng ký</a></li>
+                        <?php endif; ?>
+                    </ul>
                 </div>
                 <div class="container__user--cart">
                     <a href="?action=cart" title="Giỏ hàng">

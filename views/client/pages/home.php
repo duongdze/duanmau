@@ -11,7 +11,7 @@
                         Top sản phẩm bán chạy
                     </div>
                     <div class="bestsell__title--button content__button">
-                        <button>Xem tất cả</button>
+                        <a href="?action=bestsell"><button>Xem tất cả</button></a>
                     </div>
                 </div>
                 <div class="content__bestsell--products">

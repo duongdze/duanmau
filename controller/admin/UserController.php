@@ -81,18 +81,6 @@ class UserController
                 }
                 $data['password_hash'] = password_hash($password, PASSWORD_DEFAULT);
 
-                // Handle file upload
-                $avatarFile = $_FILES['avatar'] ?? null;
-                if ($avatarFile && $avatarFile['error'] === UPLOAD_ERR_OK) {
-                    $targetDir = PATH_ASSETS_UPLOADS;
-                    $fileName = time() . '_' . basename($avatarFile['name']);
-                    $targetFile = $targetDir . $fileName;
-
-                    if (move_uploaded_file($avatarFile['tmp_name'], $targetFile)) {
-                        $data['avatar'] = $fileName;
-                    }
-                }
-
                 $this->user->insert($data);
 
                 $_SESSION['success'] = true;
@@ -132,22 +120,6 @@ class UserController
                 $newPassword = $_POST['password'] ?? null;
                 if (!empty($newPassword)) {
                     $data['password_hash'] = password_hash($newPassword, PASSWORD_DEFAULT);
-                }
-
-                // Handle new avatar upload
-                $avatarFile = $_FILES['avatar'] ?? null;
-                if ($avatarFile && $avatarFile['error'] === UPLOAD_ERR_OK) {
-                    $targetDir = PATH_ASSETS_UPLOADS;
-                    $fileName = time() . '_' . basename($avatarFile['name']);
-                    $targetFile = $targetDir . $fileName;
-
-                    if (move_uploaded_file($avatarFile['tmp_name'], $targetFile)) {
-                        $data['avatar'] = $fileName;
-                        // Delete old avatar if it exists
-                        if (!empty($user['avatar']) && file_exists($targetDir . $user['avatar'])) {
-                            unlink($targetDir . $user['avatar']);
-                        }
-                    }
                 }
 
                 $this->user->update($data, 'user_id = :id', ['id' => $userId]);

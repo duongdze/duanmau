@@ -13,14 +13,22 @@
 
 <body>
     <main class="main__login">
-        <form class="login-form" id="loginForm">
+        <form class="login-form" id="loginForm" action="?action=handle-login" method="POST">
             <h1 class="login-form__title">Đăng nhập</h1>
+
+            <?php if (isset($_SESSION['success'])) : ?>
+                <div class="alert alert-success" style="padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    <?= $_SESSION['success'] ?>
+                </div>
+                <?php unset($_SESSION['success']); ?>
+            <?php endif; ?>
+
             <div class="login-form__group">
                 <input
-                    type="text"
+                    type="email"
                     class="login-form__input"
-                    id="username"
-                    name="username"
+                    id="email"
+                    name="email"
                     placeholder="Tên tài khoản hoặc địa chỉ email"
                     required>
             </div>

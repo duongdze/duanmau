@@ -41,10 +41,6 @@
                             <option value="admin">Admin</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="avatar" class="form-label">Ảnh đại diện:</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar">
-                    </div>
                 </div>
             </div>
 

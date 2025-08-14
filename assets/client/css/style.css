@@ -1,3 +1,19 @@
+/* 
+ 1. Header css
+ 2. home css
+ 3. contact css
+ 4. bestsell css
+ 5. cart css
+ 6. payment css
+ 7. login css
+ 8. news css
+ 9. newsdetail css
+ 10. productDetail css
+ 11. register css
+ 12. footer css
+ */
+
+
 * {
     margin: 0;
     padding: 0;
@@ -131,6 +147,27 @@
     margin-left: auto;
     /* margin-right: 20px; */
     color: #FFFFFE;
+    gap: 15px; /* Thêm khoảng cách giữa icon người dùng và giỏ hàng */
+}
+
+/* CSS cho User Dropdown */
+.header__container--user .dropdown-toggle::after {
+    display: none; /* Ẩn mũi tên mặc định của Bootstrap */
+}
+
+.header__container--user .dropdown-menu {
+    background-color: #EEBBC3; /* Đồng bộ màu với dropdown danh mục */
+    border: none;
+    margin-top: 10px !important; /* Tạo khoảng cách với icon */
+}
+
+.header__container--user .dropdown-item,
+.header__container--user .dropdown-item-text {
+    color: #232946;
+}
+
+.header__container--user .dropdown-item:hover {
+    background-color: #e8a9b4; /* Màu khi hover */
 }
 
 .container__user--login,
@@ -190,7 +227,7 @@
 
 /* 
 =====================
- Start home css
+ 2.Start home css
 ===================== 
 */
 .home {
@@ -325,7 +362,7 @@
 
 /* 
 =====================
-Start contact css
+ 3.Start contact css
 ===================== 
 */
 .contact {
@@ -576,7 +613,7 @@ Start contact css
 
 /* 
 =====================
- Start bestsell css
+ 4.Start bestsell css
 ===================== 
 */
 .bestsell {
@@ -693,7 +730,7 @@ Start contact css
 */
 /* 
 =====================
- Start cart css
+ 5.Start cart css
 ===================== 
 */
 .cart {
@@ -852,35 +889,37 @@ Start contact css
 
 /* 
 =====================
- Start payment css
+ 6.Start payment css
 ===================== 
 */
-
 .payment {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    /* Give more space to the form */
     min-height: 100vh;
+    font-family: Arial, sans-serif;
 }
 
 .payment__left {
-    background: #434567;
-    padding: 40px;
-    color: white;
+    background: #232946;
+    /* Lighter background for the form */
+    padding: 50px 60px;
+    color: #B8C1EC;
 }
 
 .payment__right {
-    background: #e8c5c5;
-    padding: 40px;
+    background: #EEBBC3;
+    /* White background for summary */
+    padding: 50px 60px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* Di chuyển nội dung vào giữa */
 }
 
 .left__title {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 40px;
+    color: #B8C1EC;
 }
 
 .left__section {
@@ -890,148 +929,141 @@ Start contact css
 .section__title {
     font-size: 1rem;
     margin-bottom: 15px;
-    color: rgba(255, 255, 255, 0.9);
+    color: #B8C1EC;
+    font-weight: 600;
 }
 
 .form__group {
-    margin-bottom: 20px;
-    /* Tăng khoảng cách */
+    margin-bottom: 15px;
 }
 
 .form__input {
     width: 100%;
-    padding: 15px;
-    border: none;
+    padding: 12px 15px;
+    border: 1px solid #dcdce0;
     border-radius: 8px;
-    background: rgba(232, 197, 197, 0.9);
+    background: #ffffff;
     font-size: 0.95rem;
-    color: #434567;
+    color: #232946;
+    transition: border-color 0.2s ease;
 }
 
 .form__input::placeholder {
-    color: #666;
+    color: #888;
+}
+
+.form__input:focus {
+    outline: none;
+    border-color: #3a3f5c;
 }
 
 .form__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    margin-bottom: 20px;
-    /* Thêm khoảng cách dưới cho đồng bộ */
+    margin-bottom: 15px;
 }
 
 .payment__note {
     font-size: 0.85rem;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.8);
+    color: #6e7187;
     margin-bottom: 30px;
 }
 
 .payment__methods {
     margin-top: 20px;
+    border-top: 1px solid #dcdce0;
+    padding-top: 20px;
 }
 
 .method__option {
     display: flex;
     align-items: center;
-    background: rgba(232, 197, 197, 0.9);
+    background: #ffffff;
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: #434567;
+    color: #232946;
+    border: 1px solid #dcdce0;
 }
 
 .method__option:hover {
-    background: rgba(232, 197, 197, 1);
+    border-color: #3a3f5c;
 }
 
 .method__option.selected {
-    background: rgba(232, 197, 197, 1);
-    border: 2px solid #434567;
+    border-color: #3a3f5c;
+    background-color: #eebbc320;
 }
 
 .method__radio {
     margin-right: 12px;
-    accent-color: #434567;
+    accent-color: #3a3f5c;
 }
 
 .method__text {
     font-size: 0.95rem;
 }
 
-.right__product {
-    background: transparent;
-    /* Bỏ khung trắng */
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 30px;
+/* Right side - Order Summary */
+.order-summary {
+    flex-grow: 1;
 }
 
-.product__info {
+.summary-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.summary-item {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.product__info--image {
-    width: 80px;
-    height: 80px;
-    background: #f8f9fa;
+.item-image {
+    position: relative;
+}
+
+.item-image img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
     border-radius: 8px;
+    background-color: #f4f4f9;
+}
+
+.item-quantity {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #3a3f5c;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-weight: bold;
 }
 
-.product__details {
-    flex: 1;
-}
-
-.product__name {
+.item-name {
     font-size: 1rem;
-    color: #232946;
-    /* Đổi màu chữ cho dễ đọc */
-    margin-bottom: 5px;
+    flex-grow: 1;
 }
 
-.product__price {
+.item-price {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #232946;
-    /* Đổi màu chữ cho dễ đọc */
-}
-
-.product__actions {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.action__btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.action__btn--promo {
-    background: #434567;
-    color: white;
-}
-
-.action__btn--promo:hover {
-    background: #363759;
-}
-
-.action__btn--apply {
-    background: transparent;
-    border: 1px solid #434567;
     color: #434567;
 }
 
@@ -1118,7 +1150,7 @@ Start contact css
 
 /* 
 =====================
- Start login css
+ 7.Start login css
 ===================== 
 */
 .main__login {
@@ -1265,7 +1297,7 @@ Start contact css
 
 /* 
 =====================
- Start news css
+ 8.Start news css
 ===================== 
 */
 
@@ -1461,7 +1493,7 @@ Start contact css
 
 /* 
 =====================
- Start newsdetail css
+ 9.Start newsdetail css
 ===================== 
 */
 
@@ -1490,7 +1522,7 @@ Start contact css
 
 /* 
 =====================
- Start productDetail css
+ 10.Start productDetail css
 ===================== 
 */
 .productDetail {
@@ -1670,7 +1702,7 @@ Start contact css
 
 /* 
 =====================
- Start register css
+ 11.Start register css
 ===================== 
 */
 .main__register {
@@ -1818,7 +1850,7 @@ Start contact css
 
 /* 
 =====================
- Start footer css
+ 12.Start footer css
 ===================== 
 */
 .footer {

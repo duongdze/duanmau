@@ -48,21 +48,22 @@
     </div>
 
     <div class="payment__right">
-        <div class="right__product">
-            <div class="product__info">
-                <div class="product__info--image">👟</div>
-                <div class="product__details">
-                    <div class="product__name">Sản phẩm</div>
-                    <div class="product__price">1.279.000₫</div>
+        <div class="order-summary">
+            <h2 class="summary-title">Đơn hàng của bạn</h2>
+            <div class="summary-items">
+                <?php foreach ($cartItems as $item) : ?>
+                <div class="summary-item">
+                    <div class="item-image">
+                        <img src="<?= BASE_ASSETS_UPLOADS . htmlspecialchars($item['image_url']) ?>" alt="<?= htmlspecialchars($item['product_name']) ?>">
+                        <span class="item-quantity"><?= $item['quantity'] ?></span>
+                    </div>
+                    <div class="item-name"><?= htmlspecialchars($item['product_name']) ?></div>
+                    <div class="item-price"><?= number_format($item['price'] * $item['quantity'], 0, ',', '.') ?>đ</div>
                 </div>
+                <?php endforeach; ?>
             </div>
 
-            <div class="product__actions">
-                <button class="action__btn action__btn--promo">Nhập mã khuyến mãi</button>
-                <button class="action__btn action__btn--apply">Áp dụng</button>
-            </div>
-
-            <div class="order__summary">
+            <div class="summary-totals">
                 <div class="summary__row">
                     <span class="summary__label">Tổng tiền hàng</span>
                     <span class="summary__value">100.000₫</span>

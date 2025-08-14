@@ -39,13 +39,6 @@
                             <option value="admin" <?= ($user['user_type'] == 'admin') ? 'selected' : '' ?>>Admin</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="avatar" class="form-label">Ảnh đại diện mới:</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar">
-                        <?php if (!empty($user['avatar'])) : ?>
-                            <img src="<?= BASE_ASSETS_UPLOADS . $user['avatar'] ?>" alt="Avatar hiện tại" class="img-thumbnail mt-2" width="100">
-                        <?php endif; ?>
-                    </div>
                 </div>
             </div>
 

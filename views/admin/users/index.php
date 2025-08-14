@@ -6,7 +6,6 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Ảnh đại diện</th>
             <th>Tên đăng nhập</th>
             <th>Email</th>
             <th>Họ và tên</th>
@@ -20,13 +19,6 @@
         <?php foreach ($data as $user) : ?>
             <tr>
                 <td><?= $user['user_id'] ?></td>
-                <td>
-                    <?php if (!empty($user['avatar'])) : ?>
-                        <img src="<?= BASE_ASSETS_UPLOADS . $user['avatar'] ?>" alt="Avatar của <?= htmlspecialchars($user['username']) ?>" width="100px">
-                    <?php else : ?>
-                        N/A
-                    <?php endif; ?>
-                </td>
                 <td><?= htmlspecialchars($user['username']) ?></td>
                 <td><?= htmlspecialchars($user['email']) ?></td>
                 <td><?= htmlspecialchars($user['full_name']) ?></td>

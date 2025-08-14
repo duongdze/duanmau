@@ -13,8 +13,15 @@
 
 <body>
     <main class="main__register">
-        <form class="register-form" id="registerForm">
+        <form class="register-form" id="registerForm" action="?action=handle-register" method="POST">
             <h1 class="register-form__title">Tạo tài khoản</h1>
+
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger" style="padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    <?= $_SESSION['error'] ?>
+                </div>
+                <?php unset($_SESSION['error']); ?>
+            <?php endif; ?>
 
             <div class="register-form__group">
                 <input
@@ -66,7 +73,7 @@
                     required>
             </div>
 
-            <button type="submit" class="register-form__button">Tạo tài khoản</button>
+            <a href="?action=login"><button type="submit" class="register-form__button">Tạo tài khoản</button></a>
             <div class="register-form__divider">Bạn đã có tài khoản?</div>
             <a href="?action=login" class="register-form__register-link">Đăng nhập ngay</a>
         </form>

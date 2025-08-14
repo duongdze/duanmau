@@ -47,8 +47,11 @@
                 </div>
             </div>
             <div class="product-info__actions">
-
-                <button class="actions__add-to-cart">Thêm vào giỏ hàng</button>
+                <form action="?action=cart-add" method="POST">
+                    <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+                    <input type="hidden" name="quantity" value="1"> <!-- Tạm thời mặc định số lượng là 1 -->
+                    <button type="submit" class="actions__add-to-cart">Thêm vào giỏ hàng</button>
+                </form>
             </div>
         </div>
     </div>

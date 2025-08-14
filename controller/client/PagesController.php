@@ -4,13 +4,26 @@ class PagesController{
         require_once PATH_VIEW_CLIENT . 'pages/contact.php';
     }
     public function bestsell(){
+        // Khởi tạo model Product
+        $productModel = new Product();
+        // Lấy tất cả sản phẩm (bạn có thể thay thế bằng logic lấy sản phẩm bán chạy nếu muốn)
+        $products = $productModel->selectAllWithCategoryName();
+
         require_once PATH_VIEW_CLIENT . 'pages/bestsell.php';
     }
-    public function cart(){
-        
-        require_once PATH_VIEW_CLIENT . 'pages/cart.php';
-    }
     public function payment(){
+        // Lấy thông tin giỏ hàng từ session để hiển thị trên trang thanh toán
+        $cartItems = $_SESSION['cart'] ?? [];
+
+        if (empty($cartItems)) {
+            header('Location: ' . BASE_URL . '?action=cart');
+            exit();
+        }
+
+        $subTotal = array_reduce($cartItems, fn($sum, $item) => $sum + ($item['price'] * $item['quantity']), 0);
+        $shippingFee = 30000; // Phí ship ví dụ
+        $total = $subTotal + $shippingFee;
+        
         require_once PATH_VIEW_CLIENT . 'pages/payment.php';
     }
     public function news(){

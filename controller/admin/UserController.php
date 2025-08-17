@@ -176,7 +176,7 @@ class UserController
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            $user = $this->user->checkLogin($email, $password);
+             $user = $this->user->checkLogin($email, $password);
 
             if ($user) {
                 $_SESSION['user'] = $user;

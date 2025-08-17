@@ -23,6 +23,13 @@
                 <?php unset($_SESSION['success']); ?>
             <?php endif; ?>
 
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger" style="padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    <?= $_SESSION['error'] ?>
+                </div>
+                <?php unset($_SESSION['error']); ?>
+            <?php endif; ?>
+
             <div class="login-form__group">
                 <input
                     type="email"

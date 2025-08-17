@@ -195,6 +195,31 @@
     opacity: 0.7;
 }
 
+.cart-icon-wrapper {
+    position: relative;
+    display: block;
+}
+
+.cart-count-badge {
+    position: absolute;
+    top: 2px; /* Dịch lên trên một chút */
+    right: 2px; /* Dịch sang trái một chút */
+    background-color: #EEBBC3;
+    color: #232946;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 11px; /* Giảm kích thước font một chút nếu số có 2 chữ số */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Thêm viền để tách biệt với icon */
+    border: 2px solid #3a3f5c;
+    /* Thêm viền để tách biệt với icon */
+    border: 2px solid #3a3f5c;
+}
+
 .container__user--login button {
     padding: 10px 20px;
     border: none;
@@ -233,7 +258,7 @@
 .home {
     background-color: #232946;
     font-family: Arial, sans-serif;
-    padding-bottom: 40px;
+    padding: 40px 0;
     /* Tạo khoảng cách với footer */
 }
 
@@ -2091,5 +2116,98 @@
 /* 
 =====================
  End footer css
+===================== 
+*/
+/* 
+=====================
+ 12. Start Order History css
+===================== 
+*/
+.order-history {
+    background-color: #232946;
+    min-height: 80vh;
+    color: #B8C1EC;
+}
+
+.order-history .main__container--header h1 {
+    color: #FFFFFE;
+}
+
+.order-history .table {
+    background-color: #e8a5a5;
+    border-radius: 8px;
+    overflow: hidden;
+    color: #FFFFFE;
+    /* Default text color for the table */
+    border: 1px solid #4a5073;
+}
+
+.order-history .table thead {
+    background-color: #4a5073;
+}
+
+.order-history .table th {
+    color: #232946;
+    font-weight: 600;
+    border-bottom: 2px solid #232946;
+    border-top: none;
+}
+
+.order-history .table td {
+    color: #B8C1EC;
+    vertical-align: middle;
+    border-top: 1px solid #4a5073;
+}
+
+.order-history .table tbody tr {
+    
+    transition: background-color 0.2s ease;
+}
+
+.order-history .table tbody tr:hover {
+    background-color: #4a5073;
+}
+
+.order-history .table th[scope="row"] {
+    color: #EEBBC3;
+    font-weight: bold;
+}
+
+/* New Status Badges for Dark Theme */
+.badge {
+    padding: 0.4em 0.7em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+    text-transform: capitalize;
+    border: 1px solid transparent;
+}
+
+.status-pending { color: #ffc107; background-color: rgba(255, 193, 7, 0.15); border-color: #ffc107; }
+.status-processing { color: #17a2b8; background-color: rgba(23, 162, 184, 0.15); border-color: #17a2b8; }
+.status-shipped { color: #007bff; background-color: rgba(0, 123, 255, 0.15); border-color: #007bff; }
+.status-delivered { color: #28a745; background-color: rgba(40, 167, 69, 0.15); border-color: #28a745; }
+.status-cancelled { color: #868e96; background-color: rgba(134, 142, 150, 0.15); border-color: #868e96; }
+.status-returned { color: #dc3545; background-color: rgba(220, 53, 69, 0.15); border-color: #dc3545; }
+
+.btn-view-detail {
+    background-color: transparent;
+    border: 1px solid #B8C1EC;
+    color: #B8C1EC;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.btn-view-detail:hover {
+    background-color: #EEBBC3;
+    border-color: #EEBBC3;
+    color: #232946;
+}
+
+/* 
+=====================
+ End Order History css
 ===================== 
 */

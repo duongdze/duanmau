@@ -32,10 +32,13 @@
                 </div>
             </div>
             <div class="header__container--search">
-                <input type="text" class="search__input" placeholder="Tìm kiếm sản phẩm...">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                    <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                </svg>
+                <form action="<?= BASE_URL ?>" method="GET" class="search-form">
+                    <input type="hidden" name="action" value="search">
+                    <input type="text" name="keyword" class="search__input" placeholder="Tìm kiếm theo tên hoặc giá..." value="<?= htmlspecialchars($_GET['keyword'] ?? '') ?>" required>
+                    <button type="submit" class="search__button" aria-label="Tìm kiếm">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
             </div>
             <div class="header__container--user">
                 <div class="dropdown">
@@ -48,6 +51,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <?php if (isset($_SESSION['user'])) : ?>
                             <li><span class="dropdown-item-text">Chào, <strong><?= htmlspecialchars($_SESSION['user']['full_name']) ?></strong></span></li>
+                            <li><a class="dropdown-item" href="?action=profile">Hồ sơ của tôi</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="?action=logout">Đăng xuất</a></li>
                         <?php else : ?>
@@ -56,12 +60,23 @@
                         <?php endif; ?>
                     </ul>
                 </div>
-                <div class="container__user--cart">
-                    <a href="?action=cart" title="Giỏ hàng">
+                <div class="container__user--cart dropdown">
+                    <a href="#" class="dropdown-toggle cart-icon-wrapper" data-bs-toggle="dropdown" aria-expanded="false" title="Giỏ hàng & Đơn hàng">
                         <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24">
                             <path fill="#FFFFFE" d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a1 1 0 0 0-1 1v11a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V8a1 1 0 0 0-1-1m-9-1a2 2 0 0 1 4 0v1h-4Zm8 13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9h2v1a1 1 0 0 0 2 0V9h4v1a1 1 0 0 0 2 0V9h2Z" />
                         </svg>
+                        <?php
+                        // Chỉ hiển thị số lượng nếu người dùng đã đăng nhập và giỏ hàng không rỗng
+                        if (isset($_SESSION['user']['cart']) && !empty($_SESSION['user']['cart'])) {
+                            $cartItemCount = count($_SESSION['user']['cart']);
+                            echo "<span class=\"cart-count-badge\">{$cartItemCount}</span>";
+                        }
+                        ?>
                     </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="?action=cart">Xem giỏ hàng</a></li>
+                        <li><a class="dropdown-item" href="?action=order-history">Lịch sử đơn hàng</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

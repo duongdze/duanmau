@@ -45,7 +45,7 @@
                         Tin tức & ưu đãi
                     </div>
                     <div class="news__title--button content__button">
-                        <button>Xem tất cả</button>
+                        <a href="?action=news"><button>Xem tất cả</button></a>
                     </div>
                 </div>
                 <div class="content__news--products">

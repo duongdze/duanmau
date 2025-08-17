@@ -31,7 +31,7 @@
                         <div class="item__actions">
                             <div class="quantity__control" data-price="<?= $item['price'] ?>">
                                 <button type="button" class="quantity__btn quantity-minus">−</button>
-                                <input type="number" name="quantities[<?= $productID ?>]" value="<?= $item['quantity'] ?>" class="quantity__input" min="1">
+                                <input type="text" name="quantities[<?= $productID ?>]" value="<?= $item['quantity'] ?>" class="quantity__input" min="1">
                                 <button type="button" class="quantity__btn quantity-plus">+</button>
                             </div>
                             <a href="?action=cart-remove&id=<?= $productID ?>" class="item__remove" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')">🗑️</a>

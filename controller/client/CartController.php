@@ -9,11 +9,22 @@ class CartController
         $this->product = new Product();
     }
 
+    private function checkAuth($message = 'Bạn cần đăng nhập để sử dụng chức năng này!')
+    {
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['error'] = $message;
+            header('Location: ' . BASE_URL . '?action=login');
+            exit();
+        }
+    }
+
     /**
      * Thêm sản phẩm vào giỏ hàng
      */
     public function add()
     {
+        $this->checkAuth('Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng!');
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productID = $_POST['product_id'] ?? null;
             $quantity = (int)($_POST['quantity'] ?? 1);
@@ -28,14 +39,14 @@ class CartController
                 die('Sản phẩm không tồn tại!');
             }
 
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
+            if (!isset($_SESSION['user']['cart'])) {
+                $_SESSION['user']['cart'] = [];
             }
 
-            if (isset($_SESSION['cart'][$productID])) {
-                $_SESSION['cart'][$productID]['quantity'] += $quantity;
+            if (isset($_SESSION['user']['cart'][$productID])) {
+                $_SESSION['user']['cart'][$productID]['quantity'] += $quantity;
             } else {
-                $_SESSION['cart'][$productID] = [
+                $_SESSION['user']['cart'][$productID] = [
                     'product_id'   => $product['product_id'],
                     'product_name' => $product['product_name'],
                     'image_url'    => $product['image_url'],
@@ -54,8 +65,10 @@ class CartController
      */
     public function showCart()
     {
-        $cartItems = $_SESSION['cart'] ?? [];
-        $subTotal = array_reduce($cartItems, fn($sum, $item) => $sum + ($item['price'] * $item['quantity']), 0);
+        $this->checkAuth('Bạn cần đăng nhập để xem giỏ hàng!');
+
+        $cartItems = $_SESSION['user']['cart'] ?? [];
+        $subTotal = array_reduce($cartItems, fn($sum, $item) => $sum += ($item['price'] * $item['quantity']), 0);
         $shippingFee = 30000; // Phí ship ví dụ
         $total = $subTotal + $shippingFee;
 
@@ -67,10 +80,12 @@ class CartController
      */
     public function remove()
     {
+        $this->checkAuth();
+
         $productID = $_GET['id'] ?? null;
         if ($productID) {
-            if (isset($_SESSION['cart'][$productID])) {
-                unset($_SESSION['cart'][$productID]);
+            if (isset($_SESSION['user']['cart'][$productID])) {
+                unset($_SESSION['user']['cart'][$productID]);
             }
         }
         header('Location: ' . BASE_URL . '?action=cart');
@@ -82,15 +97,17 @@ class CartController
      */
     public function updateAndCheckout()
     {
+        $this->checkAuth('Bạn cần đăng nhập để thanh toán!');
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['quantities']) && is_array($_POST['quantities'])) {
                 foreach ($_POST['quantities'] as $productID => $quantity) {
                     $quantity = (int)$quantity;
-                    if (isset($_SESSION['cart'][$productID])) {
+                    if (isset($_SESSION['user']['cart'][$productID])) {
                         if ($quantity > 0) {
-                            $_SESSION['cart'][$productID]['quantity'] = $quantity;
+                            $_SESSION['user']['cart'][$productID]['quantity'] = $quantity;
                         } else {
-                            unset($_SESSION['cart'][$productID]); // Xóa nếu số lượng <= 0
+                            unset($_SESSION['user']['cart'][$productID]); // Xóa nếu số lượng <= 0
                         }
                     }
                 }

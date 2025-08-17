@@ -14,10 +14,13 @@ match ($action){
     'logout' => (new AuthController)->logout(),
     'register' => (new AuthController)->register(),
     'handle-register' => (new AuthController)->handleRegister(),
+    'profile' => (new AuthController)->profile(),
+    'profile-update' => (new AuthController)->updateProfile(),
     
     //pages
     'contact' => (new PagesController)->contact(),
     'bestsell' => (new PagesController)->bestsell(),
+    'search' => (new PagesController)->search(),
 
     // Cart
     'cart' => (new CartController)->showCart(),
@@ -26,6 +29,11 @@ match ($action){
     'cart-update-and-checkout' => (new CartController)->updateAndCheckout(),
 
     'payment' => (new PagesController)->payment(),
+    'place-order' => (new OrderController)->placeOrder(),
+    'payment-success' => (new OrderController)->paymentSuccess(),
+    'order-history' => (new OrderController)->orderHistory(),
+    'order-detail' => (new OrderController)->orderDetail(),
+
     'news' => (new PagesController)->news(),
     'newsdetail' => (new PagesController)->newsdetail(),
     'productdetail' => (new PagesController)->productdetail(),

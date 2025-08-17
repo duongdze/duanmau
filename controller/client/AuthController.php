@@ -20,8 +20,9 @@ class AuthController{
                 header('Location: ' . BASE_URL); 
                 exit;
             } else {
-                $error = "Thông tin đăng nhập không hợp lệ";
-                require_once PATH_VIEW_CLIENT . 'auth/login.php';
+                $_SESSION['error'] = "Thông tin đăng nhập không hợp lệ";
+                header('Location: ' . BASE_URL . '?action=login');
+                exit();
             }
         }
     }
@@ -72,5 +73,84 @@ class AuthController{
                 exit();
             }
         }
+    }
+
+    /**
+     * Hiển thị trang hồ sơ cá nhân
+     */
+    public function profile()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASE_URL . '?action=login');
+            exit();
+        }
+
+        require_once PATH_VIEW_CLIENT . 'auth/profile.php';
+    }
+
+    /**
+     * Xử lý cập nhật thông tin cá nhân hoặc mật khẩu
+     */
+    public function updateProfile()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASE_URL . '?action=login');
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userID = $_SESSION['user']['user_id'];
+            $formType = $_POST['form_type'] ?? '';
+
+            try {
+                if ($formType === 'info') {
+                    // Cập nhật thông tin cá nhân
+                    $data = [
+                        'full_name'    => $_POST['full_name'] ?? $_SESSION['user']['full_name'],
+                        'phone_number' => $_POST['phone_number'] ?? $_SESSION['user']['phone_number'],
+                        'address'      => $_POST['address'] ?? ($_SESSION['user']['address'] ?? null),
+                    ];
+
+                    $this->user->update($data, 'user_id = :id', ['id' => $userID]);
+
+                    // Cập nhật lại session
+                    $_SESSION['user']['full_name'] = $data['full_name'];
+                    $_SESSION['user']['phone_number'] = $data['phone_number'];
+                    $_SESSION['user']['address'] = $data['address'];
+
+                    $_SESSION['success'] = 'Cập nhật thông tin thành công!';
+
+                } elseif ($formType === 'password') {
+                    // Cập nhật mật khẩu
+                    $currentPassword = $_POST['current_password'];
+                    $newPassword = $_POST['new_password'];
+                    $confirmPassword = $_POST['confirm_password'];
+
+                    // 1. Kiểm tra mật khẩu mới và xác nhận mật khẩu
+                    if (empty($newPassword) || $newPassword !== $confirmPassword) {
+                        throw new Exception('Mật khẩu mới không khớp hoặc để trống.');
+                    }
+
+                    // 2. Kiểm tra mật khẩu hiện tại có đúng không
+                    $currentUser = $this->user->find('*', 'user_id = :id', ['id' => $userID]);
+                    if (!password_verify($currentPassword, $currentUser['password_hash'])) {
+                        throw new Exception('Mật khẩu hiện tại không đúng.');
+                    }
+
+                    // 3. Cập nhật mật khẩu mới
+                    $data = [
+                        'password_hash' => password_hash($newPassword, PASSWORD_DEFAULT)
+                    ];
+                    $this->user->update($data, 'user_id = :id', ['id' => $userID]);
+
+                    $_SESSION['success'] = 'Đổi mật khẩu thành công!';
+                }
+            } catch (\Throwable $th) {
+                $_SESSION['error'] = 'Lỗi: ' . $th->getMessage();
+            }
+        }
+
+        header('Location: ' . BASE_URL . '?action=profile');
+        exit();
     }
 }

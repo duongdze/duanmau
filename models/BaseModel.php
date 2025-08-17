@@ -3,25 +3,44 @@
 class BaseModel
 {
     protected $table;
-    protected $pdo;
+    protected static $pdo;
 
     // Kết nối CSDL
     public function __construct()
     {
-        $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', DB_HOST, DB_PORT, DB_NAME);
+        // Chỉ kết nối nếu chưa có kết nối
+        if (self::$pdo === null) {
+            $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', DB_HOST, DB_PORT, DB_NAME);
 
-        try {
-            $this->pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD, DB_OPTIONS);
-        } catch (PDOException $e) {
-            // Xử lý lỗi kết nối
-            die("Kết nối cơ sở dữ liệu thất bại: {$e->getMessage()}. Vui lòng thử lại sau.");
+            try {
+                self::$pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD, DB_OPTIONS);
+            } catch (PDOException $e) {
+                // Xử lý lỗi kết nối
+                die("Kết nối cơ sở dữ liệu thất bại: {$e->getMessage()}. Vui lòng thử lại sau.");
+            }
         }
     }
 
     // Hủy kết nối CSDL
     public function __destruct()
     {
-        $this->pdo = null;
+        // Không hủy kết nối ở đây vì nó là static và có thể được sử dụng bởi các đối tượng khác
+        // self::$pdo = null;
+    }
+
+    public function beginTransaction()
+    {
+        self::$pdo->beginTransaction();
+    }
+
+    public function commit()
+    {
+        self::$pdo->commit();
+    }
+
+    public function rollBack()
+    {
+        self::$pdo->rollBack();
     }
 
     /**
@@ -52,7 +71,7 @@ class BaseModel
             $sql .= " LIMIT " . (int)$limit;
         }
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
 
         $stmt->execute($params);
 
@@ -76,7 +95,7 @@ class BaseModel
             $sql .= " WHERE $conditions";
         }
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
 
         $stmt->execute($params);
 
@@ -109,7 +128,7 @@ class BaseModel
         // vì vậy ta phải sử dụng bindValue or truyền thẳng giá trị luôn cũng được.
         $sql .= " LIMIT $perPage OFFSET $offset";
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
 
         // Chỉ dùng cách này được khi KHÔNG CÓ param của limit và offset
         // Nếu có param của limit và offset thì phải dùng hàm bindParam cho từng param 1.
@@ -136,7 +155,7 @@ class BaseModel
             $sql .= " WHERE $conditions";
         }
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
 
         $stmt->execute($params);
 
@@ -162,12 +181,12 @@ class BaseModel
         $placeholders = ':' . implode(', :', $keys);
 
         $sql = "INSERT INTO {$this->table} ($columns) VALUES ($placeholders)";
-
-        $stmt = $this->pdo->prepare($sql);
+        
+        $stmt = self::$pdo->prepare($sql);
 
         $stmt->execute($data);
-
-        return $this->pdo->lastInsertId();
+        
+        return self::$pdo->lastInsertId();
     }
 
     /**
@@ -197,7 +216,7 @@ class BaseModel
             $sql .= " WHERE $conditions";
         }
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
 
         // bindParam trong set
         foreach ($data as $key => &$value) {
@@ -231,7 +250,7 @@ class BaseModel
             $sql .= " WHERE $conditions";
         }
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = self::$pdo->prepare($sql);
 
         $stmt->execute($params);
 

@@ -12,8 +12,15 @@ class PagesController{
         require_once PATH_VIEW_CLIENT . 'pages/bestsell.php';
     }
     public function payment(){
+        // Bắt buộc đăng nhập để vào trang thanh toán
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['error'] = 'Bạn cần đăng nhập để thực hiện thanh toán!';
+            header('Location: ' . BASE_URL . '?action=login');
+            exit();
+        }
+
         // Lấy thông tin giỏ hàng từ session để hiển thị trên trang thanh toán
-        $cartItems = $_SESSION['cart'] ?? [];
+        $cartItems = $_SESSION['user']['cart'] ?? [];
 
         if (empty($cartItems)) {
             header('Location: ' . BASE_URL . '?action=cart');
@@ -51,5 +58,25 @@ class PagesController{
         }
 
         require_once PATH_VIEW_CLIENT . 'pages/productDetail.php';
+    }
+
+    /**
+     * Xử lý trang tìm kiếm sản phẩm
+     */
+    public function search()
+    {
+        // 1. Lấy từ khóa từ URL và làm sạch
+        $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
+
+        $products = [];
+        // 2. Chỉ thực hiện tìm kiếm nếu có từ khóa
+        if (!empty($keyword)) {
+            $productModel = new Product();
+            $products = $productModel->searchByNameOrPrice($keyword);
+        }
+
+        // 3. Tải view search.php và truyền dữ liệu
+        // Các biến $keyword và $products sẽ có sẵn trong file view
+        require_once PATH_VIEW_CLIENT . 'pages/search.php';
     }
 }
